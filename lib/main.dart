@@ -5,12 +5,23 @@ import 'package:assignment_4/pages/news_page.dart';
 import 'package:assignment_4/pages/register_page.dart';
 import 'package:assignment_4/pages/weather_page.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 // This is the main function which runs when the flutter app is launched
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(); //Initialize firebase
+  await Firebase.initializeApp(
+    options: kIsWeb?const FirebaseOptions(
+        apiKey: "AIzaSyC_MqKLC2ExkeL8lnKvJQATlrGuWAIxsfI",
+        authDomain: "assignment4-347b6.firebaseapp.com",
+        projectId: "assignment4-347b6",
+        storageBucket: "assignment4-347b6.appspot.com",
+        messagingSenderId: "341975139179",
+        appId: "1:341975139179:web:acadb7023fd30d971a022e",
+        measurementId: "G-11NZ1FXXEZ"
+    ): null,
+  ); //Initialize firebase
   runApp(const MyApp());
 }
 
