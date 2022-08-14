@@ -8,11 +8,11 @@ class CalculatorPage extends StatefulWidget {
 }
 
 class _CalculatorPageState extends State<CalculatorPage> {
-  final _calculatorFormKey = GlobalKey<FormState>();
+  final _calculatorFormKey = GlobalKey<FormState>(); // Form key for the calculator
 
   int total = 0;
-  final _number1TextController = TextEditingController();
-  final _number2TextController = TextEditingController();
+  final _number1TextController = TextEditingController(); // Controller for the first number
+  final _number2TextController = TextEditingController(); // Controller for the second number
 
   @override
   Widget build(BuildContext context) {
@@ -99,6 +99,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
                 fontSize: 25
               ),),
             ),
+            //Button to add the add numbers
             ElevatedButton(
               onPressed: () {
                 if (_calculatorFormKey.currentState!.validate()) {
@@ -123,6 +124,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
               ),
             ),
             const SizedBox(height: 10),
+            //Button to add the subtract numbers
             ElevatedButton(
               onPressed: () {
                 if (_calculatorFormKey.currentState!.validate()) {

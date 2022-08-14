@@ -11,8 +11,9 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final _registerFormKey = GlobalKey<FormState>();
+  final _registerFormKey = GlobalKey<FormState>(); //The form's key
 
+  //Text controllers for the text fields
   final _nameTextController = TextEditingController();
   final _emailTextController = TextEditingController();
   final _passwordTextController = TextEditingController();
@@ -33,7 +34,7 @@ class _RegisterPageState extends State<RegisterPage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Register'),
+          title: const Text('Register'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -138,10 +139,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                       setState(() {
                                         _isProcessing = true;
                                       });
-
+                                      //Function to check whether form is valid
                                       if (_registerFormKey.currentState!.validate()) {
-                                        User? user = await FireAuth
-                                            .registerUsingEmailPassword(
+                                        User? user = await FireAuth.registerUsingEmailPassword(
                                           context: context,
                                           name: _nameTextController.text,
                                           email: _emailTextController.text,
@@ -152,7 +152,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                         setState(() {
                                           _isProcessing = false;
                                         });
-
+                                        //If the user is not null remove all route and go to home page
                                         if (user != null) {
                                           Navigator.pushNamedAndRemoveUntil(context, '/', (Route<dynamic> route) => false);
                                         }

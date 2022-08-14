@@ -21,6 +21,7 @@ class _NewsPageState extends State<NewsPage> {
     futureData = getNewsData();
   }
 
+  //Function to get the news data
   Future<List<News>> getNewsData() async {
     final response = await http.get(Uri.parse('https://api.nytimes.com/svc/topstories/v2/world.json?api-key=Hj6Dggr3aCeqMTkIGBqqWuSKRJArUkUA'));
     if (response.statusCode == 200) {
@@ -49,7 +50,7 @@ class _NewsPageState extends State<NewsPage> {
       ),
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10),
-        child: FutureBuilder<List<News>>(
+        child: FutureBuilder<List<News>>(//Future builder to get the news
           future: futureData,
           builder: (context, snapshot) {
               if (snapshot.hasData) {

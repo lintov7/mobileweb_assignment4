@@ -14,7 +14,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
 
-
+  // Function to check whether the user is logged in or not.
+  // If the user is not logged in redirect to login page
   Future<FirebaseApp> _initializeFirebase() async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
 
@@ -23,12 +24,11 @@ class _HomePageState extends State<HomePage> {
     if (user == null) {
       Navigator.of(context).pushReplacementNamed('/login');
     }
-
     return firebaseApp;
   }
 
   Future<void> _signOut() async {
-    await FirebaseAuth.instance.signOut();
+    await FirebaseAuth.instance.signOut(); // Code to signs out a user
   }
 
   @override
@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
           ), //Ico
         ],
       ),
-      body: FutureBuilder(
+      body: FutureBuilder( // Future builder to check the firebase status
           future: _initializeFirebase(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
@@ -110,7 +110,7 @@ class _HomePageState extends State<HomePage> {
               );
             } else {
               return const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(), // Creates a circular progress view
               );
             }
           }),

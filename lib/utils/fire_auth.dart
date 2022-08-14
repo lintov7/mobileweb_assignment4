@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class FireAuth {
-  // For registering a new user
+  // Code for registering new user in firebase
   static Future<User?> registerUsingEmailPassword({
     required BuildContext context,
     required String name,
@@ -38,12 +38,12 @@ class FireAuth {
       var snackBar = const SnackBar(
         content: Text("Something went wrong"),
       );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      ScaffoldMessenger.of(context).showSnackBar(snackBar); //Showing snackbar when there is error in sign up
     }
     return user;
   }
 
-  // For signing in an user (have already registered)
+  // Code for signing in an old user
   static Future<User?> signInUsingEmailPassword({
     required BuildContext context,
     required String email,
@@ -68,18 +68,9 @@ class FireAuth {
       var snackBar = SnackBar(
         content: Text(error),
       );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      ScaffoldMessenger.of(context).showSnackBar(snackBar); //Showing snackbar when there is error in sign in
     }
 
     return user;
-  }
-
-  static Future<User?> refreshUser(User user) async {
-    FirebaseAuth auth = FirebaseAuth.instance;
-
-    await user.reload();
-    User? refreshedUser = auth.currentUser;
-
-    return refreshedUser;
   }
 }

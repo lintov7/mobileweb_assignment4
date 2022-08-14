@@ -11,8 +11,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>(); //The form's key
 
+  //Text controllers for the text fields
   final _emailTextController = TextEditingController();
   final _passwordTextController = TextEditingController();
 
@@ -21,6 +22,8 @@ class _LoginPageState extends State<LoginPage> {
 
   bool _isProcessing = false;
 
+  // Function to check whether the user is logged in or not.
+  // If the user is logged in redirect to home page
   Future<FirebaseApp> _initializeFirebase() async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
 
@@ -44,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
         appBar: AppBar(
           title: const Text('Login'),
         ),
-        body: FutureBuilder(
+        body: FutureBuilder( // Future builder to check the firebase status
           future: _initializeFirebase(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
@@ -125,14 +128,13 @@ class _LoginPageState extends State<LoginPage> {
                                         onPressed: () async {
                                           _focusEmail.unfocus();
                                           _focusPassword.unfocus();
-
+                                          //Function to check whether form is valid
                                           if (_formKey.currentState!.validate()) {
                                             setState(() {
                                               _isProcessing = true;
                                             });
 
-                                            User? user = await FireAuth
-                                                .signInUsingEmailPassword(
+                                            User? user = await FireAuth.signInUsingEmailPassword(
                                               context: context,
                                               email: _emailTextController.text,
                                               password:
@@ -142,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
                                             setState(() {
                                               _isProcessing = false;
                                             });
-
+                                            //If the user is not null remove all route and go to home page
                                             if (user != null) {
                                               Navigator.pushReplacementNamed(context, '/');
                                             }

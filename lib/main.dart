@@ -7,9 +7,10 @@ import 'package:assignment_4/pages/weather_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+// This is the main function which runs when the flutter app is launched
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(); //Initialize firebase
   runApp(const MyApp());
 }
 
@@ -22,13 +23,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Assignment 4',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
       ),
-      initialRoute: '/',
-      routes: {
-        // When navigating to the "/" route, build the FirstScreen widget.
+      initialRoute: '/', // The initial route the app will be redirected to.
+      routes: { // All the routes of the app is listed below.
         '/': (context) => const HomePage(),
-        // When navigating to the "/second" route, build the SecondScreen widget.
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterPage(),
         '/weather': (context) => const WeatherPage(),

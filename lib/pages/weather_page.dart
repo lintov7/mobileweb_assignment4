@@ -15,14 +15,14 @@ class _WeatherPageState extends State<WeatherPage> {
   Future<WeatherData> futureData = Future<WeatherData>.delayed(const Duration(seconds: 0), () {
     return const WeatherData();
   });
-  final _cityTextController = TextEditingController();
+  final _cityTextController = TextEditingController(); // The city text controller
   var city = "";
 
+  //Code to get the weather for the city given by user
   Future<WeatherData> getWeatherData() async {
     final response = await http.get(Uri.parse(
         'https://api.openweathermap.org/data/2.5/weather?q=$city&units=metric&appid=2c8d07a872803f8287189b1366f2dda6'));
     if (response.statusCode == 200) {
-      print(response.body);
       var json = jsonDecode(response.body);
       if (json['main'] != null) {
         return WeatherData.fromJson(json['main']);
@@ -79,11 +79,11 @@ class _WeatherPageState extends State<WeatherPage> {
               ),
             ),
             Expanded(
-              child: FutureBuilder<WeatherData>(
+              child: FutureBuilder<WeatherData>( // Future builder to show whether data
                 future: futureData,
                 builder: (context, snapshot) {
                   if (city.isNotEmpty) {
-                    if (snapshot.hasData) {
+                    if (snapshot.hasData) { //If the snapshot has data
                       return Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -127,7 +127,7 @@ class _WeatherPageState extends State<WeatherPage> {
                           ],
                         ),
                       );
-                    } else if (snapshot.hasError) {
+                    } else if (snapshot.hasError) { //If the snapshot has error
                       return Center(child: Text('${snapshot.error}'));
                     }
                     return const Center(child: CircularProgressIndicator());
